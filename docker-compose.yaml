@@ -1,0 +1,79 @@
+version: '3.8'
+
+networks:
+  nesjs-network:
+    driver: bridge
+
+services:
+  mongo1:
+    container_name: mongo1
+    image: mongo
+    volumes:
+      - ./mongodb/mongors/data1:/data/db
+      - ./mongodb/rs-init.sh:/scripts/rs-init.sh
+    networks:
+      - nesjs-network
+    ports:
+      - 27017:27017
+    links:
+      - mongo2
+      - mongo3
+    restart: always
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "dbrs"
+      ]
+  mongo2:
+    container_name: mongo2
+    image: mongo
+    volumes:
+      - ./mongodb/mongors/data2:/data/db
+    networks:
+      - nesjs-network
+    ports:
+      - 27018:27017
+    restart: always
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "dbrs"
+      ]
+  mongo3:
+    container_name: mongo3
+    image: mongo
+    volumes:
+      - ./mongodb/mongors/data3:/data/db
+    networks:
+      - nesjs-network
+    ports:
+      - 27019:27017
+    restart: always
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "dbrs"
+      ]
+
+  nestjs:
+    container_name: nestjs
+    build: .
+    ports:
+      - 3000:3000
+    restart: always
+    init: true
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    networks:
+      - nesjs-network

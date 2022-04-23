@@ -1,0 +1,54 @@
+mutation CreateUser {
+  createUser(
+    createUser: {
+      firstName: "Jose"
+      lastName: "Estrella"
+      email: "jose@avg.com"
+      password: "password"
+    }
+  ) {
+    _id
+    firstName
+    email
+    password
+    createdAt
+    roles
+  }
+}
+
+query FindOne {
+  findOne(_id: "615cf51fde81562fe6247590") {
+    _id
+    firstName
+    lastName
+    email
+  }
+}
+
+query FindAllUsers {
+  findAllUsers {
+    _id
+    firstName
+    lastName
+    email
+  }
+}
+
+query Login {
+  login(email: "jose@avg.com", password: "password")
+}
+
+mutation UpdatePassword {
+  updateUserPassword(currentPassword: "sssss", newPassword: "aaaaa") {
+    firstName
+  }
+}
+
+mutation UpdateUser {
+  updateUser(updateUser: { email: "test@me.com", firstName: "Steve" }) {
+    _id
+    firstName
+    lastName
+    email
+  }
+}
