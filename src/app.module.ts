@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { ScoresModule } from './app/main/scores/scores.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { environment } from './environment';
+import { UserModule } from './app/main/user/user.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { environment } from './environment';
       playground: true,
       debug: false
     }),
+    UserModule,
     ScoresModule
   ],
   controllers: [AppController],

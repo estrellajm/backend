@@ -4,7 +4,7 @@ import { Model, Types } from 'mongoose';
 import { User, UserDocument } from './entity/user.entity';
 import { CreateUser, UpdateUser } from './dto/user.dto';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { GraphQLError } from 'graphql';
 import { UserInterface } from './interfaces/user.interface';
 
