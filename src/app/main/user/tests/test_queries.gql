@@ -16,6 +16,19 @@ mutation CreateUser {
   }
 }
 
+query Login {
+  login(email: "jose@avg.com", password: "password")
+}
+
+
+# must add an "HTTP HEADER" with auth token
+# 
+# {
+#   "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VAYXZnLmNvbSIsIl9pZCI6IjYyNjQ5NDkzMmJhNmEwOTJkNWVmMjEwMCIsImlhdCI6MTY1MDc3NDM1NSwiZXhwIjoxNjUwODYwNzU1fQ.d0kfS1xmt2IiSBFPFKUp1lde8-XvkIaiE_SWcO7esbw"
+# }
+
+
+
 query FindOne {
   findOne(_id: "615cf51fde81562fe6247590") {
     _id
@@ -34,9 +47,6 @@ query FindAllUsers {
   }
 }
 
-query Login {
-  login(email: "jose@avg.com", password: "password")
-}
 
 mutation UpdatePassword {
   updateUserPassword(currentPassword: "sssss", newPassword: "aaaaa") {
