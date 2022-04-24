@@ -38,8 +38,8 @@ query FindOne {
   }
 }
 
-query FindAllUsers {
-  findAllUsers {
+query getAllUsers {
+  getAllUsers {
     _id
     firstName
     lastName
