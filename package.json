@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "docker compose up -d",
-    "start:build": "docker compose up -d --build --force-recreate && docker exec mongo1 /scripts/rs-init.sh",
+    "start:build": "docker compose up -d --build && docker exec mongo1 /scripts/rs-init.sh",
     "stop": "docker compose down",
     "logs:nestjs": "docker logs -f nestjs",
     "prebuild": "rimraf dist",
